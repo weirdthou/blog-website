@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './styles/article-content.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 342 80% 30%; /* Burgundy accent color */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --newspaper-dark: #333333;
+    --newspaper-muted: #666666;
+    --newspaper-accent: #8a1538; /* Burgundy accent */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 342 80% 50%; /* Brighter burgundy for dark mode */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --newspaper-dark: #ffffff;
+    --newspaper-muted: #a0a0a0;
+    --newspaper-accent: #d14668; /* Brighter burgundy for dark mode */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-white text-newspaper-dark font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-newspaper-dark;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-bold leading-tight mb-4;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold leading-tight mb-3;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold leading-snug mb-3;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold leading-snug mb-2;
+  }
+
+  p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  a {
+    @apply text-newspaper-accent hover:underline transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-newspaper-accent hover:bg-red-900/90 text-white py-2 px-6 rounded font-medium transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply border border-newspaper-accent text-newspaper-accent hover:bg-red-900/10 py-2 px-6 rounded font-medium transition-colors duration-200;
+  }
+
+  .container-newspaper {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .article-card {
+    @apply border-b border-gray-200 pb-6 mb-6 last:border-b-0 last:mb-0 last:pb-0 transition-all duration-200 hover:border-newspaper-accent;
+  }
+
+  .article-title {
+    @apply font-serif text-xl md:text-2xl font-bold leading-tight mb-2 hover:text-newspaper-accent transition-colors duration-200;
+  }
+
+  .article-meta {
+    @apply text-newspaper-muted text-sm mb-3;
+  }
+
+  .article-excerpt {
+    @apply text-newspaper-dark mb-3;
+  }
+
+  .article-body {
+    @apply prose max-w-none;
+  }
+
+  .news-column {
+    @apply border-r border-gray-200 pr-6;
+  }
+
+  .navbar {
+    @apply bg-white border-b border-gray-200 py-4;
+  }
+
+  .navbar-link {
+    @apply text-newspaper-dark hover:text-newspaper-accent font-medium transition-colors duration-200;
+  }
+
+  .category-badge {
+    @apply text-xs font-medium uppercase tracking-wider px-2 py-1 bg-gray-100 text-newspaper-muted rounded hover:bg-red-900/10 hover:text-newspaper-accent transition-all duration-200;
+  }
+
+  /* Hero carousel animations */
+  .animate-fadeIn {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Dark mode adjustments */
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.dark .bg-white {
+  @apply bg-gray-900;
+}
+
+.dark .border-gray-100,
+.dark .border-gray-200 {
+  @apply border-gray-800;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-400;
+}
+
+.dark .bg-gray-50,
+.dark .bg-gray-100 {
+  @apply bg-gray-800;
+}
+
+.dark .category-badge {
+  @apply bg-gray-800 text-gray-400 hover:bg-red-900/20;
+}
+
+/* Improve text contrast in dark mode */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  @apply text-gray-100;
+}
+
+.dark .article-title {
+  @apply text-gray-100 hover:text-red-400;
+}
+
+.dark .article-meta {
+  @apply text-gray-400;
+}
+
+.dark .article-excerpt {
+  @apply text-gray-300;
+}
+
+.dark .text-newspaper-muted {
+  @apply text-gray-400;
+}
+
+.dark .text-newspaper-dark {
+  @apply text-gray-100;
+}
