@@ -54,12 +54,12 @@ class DatabaseSeeder:
         self.seed_users()
         self.seed_categories()
         self.seed_tags()
-        self.seed_articles()
-        self.seed_article_engagement()
-        self.seed_comments()
-        self.seed_comment_engagement()
-        self.seed_contacts()
-        self.seed_subscribers()
+        # self.seed_articles()
+        # self.seed_article_engagement()
+        # self.seed_comments()
+        # self.seed_comment_engagement()
+        # self.seed_contacts()
+        # self.seed_subscribers()
         
         print("\n" + "=" * 60)
         print("Database seeding completed successfully!")
@@ -82,8 +82,8 @@ class DatabaseSeeder:
         print("✓ Migrations completed")
     
     def seed_users(self):
-        """Create admin and regular users"""
-        print("\n[SEED] Creating users...")
+        """Create admin user only"""
+        print("\n[SEED] Creating admin user...")
         
         # Create superuser/admin
         admin, created = User.objects.get_or_create(
@@ -94,80 +94,37 @@ class DatabaseSeeder:
                 'bio': 'System administrator and chief editor',
                 'is_staff': True,
                 'is_superuser': True,
+                'is_active': True,
             }
         )
         if created:
             admin.set_password('admin1234')
             admin.save()
             print(f"  ✓ Created admin: {admin.email}")
+        else:
+            # Update existing admin to ensure correct password
+            admin.set_password('admin1234')
+            admin.is_staff = True
+            admin.is_superuser = True
+            admin.is_active = True
+            admin.role = 'admin'
+            admin.save()
+            print(f"  ✓ Updated admin: {admin.email}")
         self.users.append(admin)
-        
-        # Create regular users/authors
-        user_data = [
-            {
-                'email': 'john.doe@example.com',
-                'name': 'John Doe',
-                'bio': 'Tech enthusiast and software developer with 10+ years of experience',
-                'role': 'user'
-            },
-            {
-                'email': 'jane.smith@example.com',
-                'name': 'Jane Smith',
-                'bio': 'Frontend developer passionate about UI/UX and modern web technologies',
-                'role': 'user'
-            },
-            {
-                'email': 'mike.johnson@example.com',
-                'name': 'Mike Johnson',
-                'bio': 'Full-stack developer and open-source contributor',
-                'role': 'user'
-            },
-            {
-                'email': 'sarah.williams@example.com',
-                'name': 'Sarah Williams',
-                'bio': 'DevOps engineer and cloud architecture specialist',
-                'role': 'user'
-            },
-            {
-                'email': 'david.brown@example.com',
-                'name': 'David Brown',
-                'bio': 'Data scientist exploring AI and machine learning',
-                'role': 'user'
-            },
-        ]
-        
-        for data in user_data:
-            user, created = User.objects.get_or_create(
-                email=data['email'],
-                defaults={
-                    'name': data['name'],
-                    'bio': data['bio'],
-                    'role': data['role'],
-                }
-            )
-            if created:
-                user.set_password('password123')
-                user.save()
-                print(f"  ✓ Created user: {user.name}")
-            self.users.append(user)
         
         print(f"  Total users: {len(self.users)}")
     
     def seed_categories(self):
-        """Create categories with hierarchical structure"""
-        print("\n[SEED] Creating categories...")
+        """Create popular categories only"""
+        print("\n[SEED] Creating popular categories...")
         
         category_data = [
-            {'name': 'Technology', 'description': 'All things tech - software, hardware, and innovation', 'parent': None},
-            {'name': 'Programming', 'description': 'Programming languages, frameworks, and best practices', 'parent': 'Technology'},
-            {'name': 'Web Development', 'description': 'Frontend, backend, and full-stack web development', 'parent': 'Programming'},
-            {'name': 'Mobile Development', 'description': 'iOS, Android, and cross-platform mobile apps', 'parent': 'Programming'},
-            {'name': 'DevOps', 'description': 'CI/CD, cloud infrastructure, and deployment automation', 'parent': 'Technology'},
-            {'name': 'Design', 'description': 'UI/UX design, graphics, and creative workflows', 'parent': None},
-            {'name': 'Business', 'description': 'Startups, entrepreneurship, and business strategy', 'parent': None},
-            {'name': 'Lifestyle', 'description': 'Health, productivity, and work-life balance', 'parent': None},
-            {'name': 'Tutorials', 'description': 'Step-by-step guides and how-to articles', 'parent': None},
-            {'name': 'News', 'description': 'Latest tech news and industry updates', 'parent': None},
+            {'name': 'Politics', 'description': 'Political news, analysis, and current affairs', 'parent': None},
+            {'name': 'Entertainment', 'description': 'Movies, music, TV shows, and celebrity news', 'parent': None},
+            {'name': 'Sports', 'description': 'Sports news, scores, and athlete updates', 'parent': None},
+            {'name': 'Business', 'description': 'Business news, finance, and economics', 'parent': None},
+            {'name': 'Lifestyle', 'description': 'Health, wellness, travel, and lifestyle trends', 'parent': None},
+            {'name': 'Opinion', 'description': 'Editorial content and opinion pieces', 'parent': None},
         ]
         
         # First pass: create all categories
@@ -192,17 +149,16 @@ class DatabaseSeeder:
         print(f"  Total categories: {len(self.categories)}")
     
     def seed_tags(self):
-        """Create tags"""
-        print("\n[SEED] Creating tags...")
+        """Create popular tags only"""
+        print("\n[SEED] Creating popular tags...")
         
         tag_names = [
-            'Python', 'JavaScript', 'TypeScript', 'React', 'Vue.js', 'Angular',
-            'Django', 'Flask', 'FastAPI', 'Node.js', 'Express', 'Next.js',
-            'Docker', 'Kubernetes', 'AWS', 'Azure', 'GCP', 'CI/CD',
-            'Machine Learning', 'AI', 'Data Science', 'Backend', 'Frontend',
-            'Full Stack', 'API', 'REST', 'GraphQL', 'Database', 'PostgreSQL',
-            'MongoDB', 'Redis', 'Testing', 'Security', 'Performance',
-            'Tutorial', 'Beginner', 'Advanced', 'Best Practices', 'Tips',
+            'Breaking News', 'World News', 'Local News', 'Election', 'Government',
+            'Movies', 'Music', 'TV Shows', 'Celebrity', 'Culture',
+            'Football', 'Basketball', 'Baseball', 'Soccer', 'Olympics',
+            'Finance', 'Economy', 'Stock Market', 'Cryptocurrency',
+            'Health', 'Travel', 'Food', 'Fashion', 'Wellness',
+            'Editorial', 'Analysis', 'Commentary', 'Interview',
         ]
         
         for name in tag_names:
